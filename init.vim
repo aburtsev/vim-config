@@ -1,3 +1,4 @@
+set clipboard+=unnamedplus
 setglobal nocompatible
 setglobal pastetoggle=<F2>
 
