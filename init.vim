@@ -83,6 +83,26 @@ Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
 
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
+
 call plug#end()
 
 set rtp+=/root/.fzf
@@ -291,6 +311,18 @@ nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
 " find merge conflict markers
 nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
+let $FZF_DEFAULT_COMMAND = 'ag -l
+      \ --nocolor
+      \ --hidden
+      \ --ignore .git
+      \ --ignore .DS_Store
+      \ --ignore coverage
+      \ --ignore node_modules
+      \ --ignore package-lock.json
+      \ --ignore .cache
+      \ --ignore dist
+      \ -g ""'
+
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
@@ -385,3 +417,7 @@ menu Encoding.utf-8 :e ++enc=utf8 <CR>
 menu Encoding.koi8-u :e ++enc=koi8-u ++ff=unix<CR>
 map <F8> :emenu Encoding.<TAB>
 
+nmap <Leader>pr <Plug>(Prettier)
+
+autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
