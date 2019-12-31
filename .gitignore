@@ -1,1 +1,4 @@
 *.netrwhist
+.tmp.drivedownload/
+.vim/
+autoload/
