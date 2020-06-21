@@ -1,181 +1,33 @@
-set clipboard+=unnamedplus
-setglobal nocompatible
-setglobal pastetoggle=<F2>
+" =============== Basic settings ===============
 
-set ttyfast
-set lazyredraw
-
-let g:python_host_skip_check=1
-let g:loaded_python3_provider=1
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'tpope/vim-sensible'
-Plug 'ervandew/supertab'
-" Plug 'ajh17/VimCompletesMe'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
-" Plug 'neomake/neomake'
-Plug 'w0rp/ale'
-
-Plug 'junegunn/fzf', {'dir':'~/.fzf', 'do': './install -all'}
-Plug 'junegunn/fzf.vim'
-" Plug 'w0rp/ale'
-" Plug 'lxhillwind/leader-clipboard'
-Plug 'ntpeters/vim-better-whitespace'
-" Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'hashivim/vim-terraform', { 'for': 'terraform' }
-Plug 'janko-m/vim-test'
-Plug 'rhysd/vim-grammarous', { 'on': 'GrammarousCheck' }
-Plug 'Shougo/echodoc.vim'
-Plug 'fatih/vim-nginx', { 'for': 'nginx' }
-" Plug 'jlanzarotta/bufexplorer'
-Plug 'lepture/vim-jinja', { 'for': 'jinja' }
-" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'tpope/vim-surround'
-Plug 'wellle/targets.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
-Plug 'nanotech/jellybeans.vim'
-Plug 'dyng/ctrlsf.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-projectionist'
-Plug 'othree/html5.vim'
-Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
-Plug 'slim-template/vim-slim', { 'for': ['slim', 'slime'] }
-Plug 'editorconfig/editorconfig-vim'
-Plug 'cohama/lexima.vim'
-
-Plug 'tpope/vim-ragtag'
-Plug 'mhartington/vim-typings'
-
-Plug 'elzr/vim-json'
-Plug 'pangloss/vim-javascript'
-" Plug 'mitermayer/vim-prettier', {
-"       \ 'do': 'npm install',
-"       \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
-" Plug 'maxmellon/vim-jsx-pretty'
-Plug 'chemzqm/vim-jsx-improve', { 'for': 'javascript' }
-" Plug 'moll/vim-node'
-Plug 'mattn/emmet-vim', { 'for': 'html' }
-Plug 'reedes/vim-lexical'
-
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
-" Plug 'Valloric/MatchTagAlways'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'shime/vim-livedown', { 'for': 'markdown' }
-Plug 'tpope/vim-haml', { 'for': 'haml' }
-" Plug 'tpope/vim-git'
-Plug 'michaeljsmith/vim-indent-object'
-
-Plug 'kovisoft/slimv', { 'for': ['clojure', 'scheme', 'racket'] }
-Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
-
-Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
-" Plug 'henrik/vim-yaml-flattener'
-
-Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-Plug 'ekalinin/Dockerfile.vim', { 'for': 'Dockerfile' }
-
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
-
-call plug#end()
+set clipboard+=unnamedplus " Use system clipboard
 
 set rtp+=/root/.fzf
 
 let mapleader = "\<Space>"
 
-" https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
+set expandtab " On pressing tab, insert 2 spaces
+set tabstop=2 " show existing tab with 2 spaces width
+set softtabstop=2
+set shiftwidth=2 " when indenting with '>', use 2 spaces width
+
 " Enable hotkeys for Russian layout
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
-setlocal spell spelllang=en_us,ru_yo
-" Russian support for vim hotkeys
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
-highlight lCursor guifg=NONE guibg=Cyan
 
-" set visualbell
-set completeopt=noinsert,menuone,noselect
+set visualbell " in error case show visual bell instead of sound
 
-" if has('mouse')
-"   set mouse=a
-" endif
-
-" if has("clipboard")
-set ttyfast
-
-set shortmess+=c
+set mouse=a " Enable mouse support
 
 set cursorline
-set hidden
-set nofoldenable
-set wrap
-set linebreak
+highlight lCursor guifg=NONE guibg=Cyan
+
 set number
-set hlsearch
 set ignorecase
 set smartcase
 
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowritebackup
-set nowb
-set noswapfile
-
-set showcmd       " display incomplete commands
-set autowrite     " Automatically :write before running commands
-
-" Use one space, not two, after punctuation.
-" set nojoinspaces
-
-" set softtabstop=4
-set expandtab
-" set noexpandtab
-set softtabstop=2
-set shiftwidth=2
-
-set splitbelow
-set cmdheight=2
-set signcolumn=yes
 set scrolloff=3
 
-silent! colorscheme jellybeans
-
-" ================ Persistent Undo ==================
-" Keep undo history across sessions, by storing in file.
-" Only works all the time.
-if has('persistent_undo')
-  silent !mkdir ~/.vim/backups > /dev/null 2>&1
-  set undodir=~/.vim/backups
-  set undofile
-endif
-
-""" Basics Keymaps
+" ============ Basics Keymaps ==================
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with line wrapping on, this can cause the cursor to actually skip a few lines on the screen because it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down' to mean the next line on the screen
 nmap j gj
@@ -187,211 +39,25 @@ map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
 
-nmap <silent> <leader>t :TestNearest<CR>
-" nmap <silent> t<C-f> :TestFile<CR>
-" nmap <silent> t<C-s> :TestSuite<CR>
-" nmap <silent> t<C-l> :TestLast<CR>
-" nmap <silent> t<C-g> :TestVisit<CR>
-
-" Auto indent pasted text
-" nnoremap p p=`]<C-o>
-" nnoremap P P=`]<C-o>
-
-" Edit .vimrc
-map <leader>vl :vsp $MYVIMRC<CR>
-map <leader>vr :source $MYVIMRC<CR>
-
-""" Plugins Keymaps
-
-nmap <C-m> :NERDTreeFind<CR>
-nmap <silent> <leader><leader> :NERDTreeToggle<CR>
-
-nnoremap <leader>b :Buffers<CR>
-
-inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "\<C-k>"
-
+" copy-paste across vim instances
 vmap <leader>y :w! /tmp/.vbuf<CR>
 nmap <leader>y :.w! /tmp/.vbuf<CR>
 nmap <leader>p :r /tmp/.vbuf<CR>
 
-" Move between linting errors
-" nnoremap ]r :ALENextWrap<CR>
-" nnoremap [r :ALEPreviousWrap<CR>
-
-map <leader>cr :GrammarousCheck --lang=ru --preview<CR>
-
-""" Plugin Settings
-
-" let g:LanguageClient_autoStart = 1
-
-" " \ 'yaml': ['yaml-language-server', '--stdio']
-" let g:LanguageClient_serverCommands = {
-"       \ 'php': ['php', expand('~/.vim/plugged/php-language-server/bin/php-language-server.php')],
-"       \ 'javascript': ['javascript-typescript-stdio'],
-"       \ 'javascript.jsx': ['javascript-typescript-stdio'],
-"       \ 'java': ['/usr/local/bin/jdtls'],
-"       \ 'ruby': ['solargraph', 'stdio'],
-"       \ 'python': ['pyls'],
-"       \ 'elixir': ['sh', expand('~/.elixir.d/elixir-ls/language_server.sh')],
-"       \ }
-
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_toc_autofit = 1
-let g:lexical#spelllang = ['en_us', 'ru_ru']
-
-" let g:ale_elixir_credo_executable='make'
-let g:ale_elixir_elixir_ls_release = '/root/elixir-ls'
-
-let g:airline#extensions#ale#enabled = 1
-let g:ale_completion_enabled = 1
-" let g:ale_elixir_elixir_ls_release = expand('~/.elixir.d/elixir-ls')
-let g:ale_php_phpcs_standard = 'PSR12'
-let g:ale_php_phpcs_executable = expand('~/.composer/vendor/bin/phpcs')
-let g:ale_php_phpcs_use_global = 1
-let g:ale_linters = {
-      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'javascript': ['eslint', 'tsserver'],
-      \   'elixir': ['elixir-ls', 'mix'],
-      \}
-
-      " \   'elixir': ['elixir-ls', 'mix', 'credo'],
-      " \   'python': ['flake8'],
-      " \   'ruby': ['rubocop', 'brakeman'],
-      " \   'markdown': [],
-      " \   'yaml': ['yamllint'],
-
-let g:ale_fixers = {
-      \ 'javascript': ['eslint'],
-      \ 'html': ['tidy'],
-      \ 'python': ['black'],
-      \ 'ruby': ['rubocop'],
-      \ 'elixir': ['mix_format'],
-      \ }
-let g:ale_php_langserver_use_global = 1
-let g:ale_php_langserver_executable = expand('~/.composer/vendor/bin/php-language-server.php')
-
-let g:ale_javascript_tsserver_use_global = 1
-let g:ale_javascript_eslint_use_global = 1
-
-let test#strategy = "neovim"
-
-" let g:buffergator_viewport_split_policy = "B"
-" let g:buffergator_sort_regime = "mru"
-
-let g:vim_markdown_folding_disabled = 1
-
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-" xmap <C-k>     <Plug>(neosnippet_expand_target)
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-" " let g:SuperTabCrMapping                = 0
-" " let g:UltiSnipsExpandTrigger           = '<tab>'
-" let g:UltiSnipsJumpForwardTrigger      = '<tab>'
-" let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-nmap <F8> :TagbarToggle<CR>
-
-" nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-" " Toggle paste mode
-" nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
-" imap <silent> <F4> <ESC>:set invpaste<CR>:set paste?<CR>
-
 " format the entire file
 nnoremap ff :normal! gg=G``<CR>
 
-" set text wrapping toggles
-nmap <silent> <leader>tw :set invwrap<CR>:set wrap?<CR>
-
-" find merge conflict markers
-nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
-
-let $FZF_DEFAULT_COMMAND = 'ag -l
-      \ --nocolor
-      \ --hidden
-      \ --ignore .git
-      \ --ignore .DS_Store
-      \ --ignore coverage
-      \ --ignore node_modules
-      \ --ignore package-lock.json
-      \ --ignore .cache
-      \ --ignore dist
-      \ -g ""'
-
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>o :GFiles .<CR>
-nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fa :Ag<CR>
-
-let NERDTreeIgnore = ['\.pyc$', '\.retry$']
-
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
+" hide search matches by type '//' and show them again with ",hl" key
+" combination
 nmap <silent> // :nohlsearch<CR>
 noremap ,hl :set hlsearch! hlsearch?<CR>
-
-" Allows you to enter sudo pass and save the file
-" " when you forgot to open your file with sudo
-cmap w!! %!sudo tee > /dev/null %
-
-" nnoremap <silent> <bs> <C-w><Left>
-
-" let g:bufExplorerDisableDefaultKeyMapping=1
-" let g:bufExplorerShowRelativePath=1
-
-" let g:deoplete#enable_at_startup = 1
-
-" Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-" imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" if filereadable(expand("~/.vimrc.after"))
-"   source ~/.vimrc.after
-" endif
-
-" augroup Common
-"   autocmd!
-"   autocmd BufEnter * EnableStripWhitespaceOnSave
-" augroup END
-
-augroup FileTypeTetect
-  autocmd!
-  " au BufEnter *.markdown,*.mkd,*.md setl wrap tw=79
-  " au BufEnter *.json setl ft=javascript
-  " au BufEnter *.coffee setl sw=2 expandtab
-  " au BufEnter *.py setl ts=4 sw=4 sts=4
-  autocmd BufEnter *.php setlocal ts=4 sw=4 sts=4
-  autocmd BufEnter *.java setlocal ts=4 sw=4 sts=4
-  autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
-  autocmd BufNewFile,BufRead *.slime setlocal filetype=slim
-  autocmd BufNewFile,BufRead *.jsh setlocal filetype=java
-  " au BufEnter *.js setl ts=2 sw=2 sts=2
-  " au BufEnter *.html setl ts=4 sw=4 sts=4
-  " au BufEnter *.tex setl wrap tw=79 fo=tcqor
-  " au BufEnter *.[ch] setl cindent
-  " au BufEnter *.[ch]pp setl cindent
-  " au BufEnter Makefile setl ts=4 sts=4 sw=4 noet list
-  " au BufEnter *.es6 setf javascript
-augroup END
 
 " Open new split for C+hjkl, if split doesnt exist
 map <silent> <C-h> :call WinMove('h')<CR>
 map <silent> <C-j> :call WinMove('j')<CR>
 map <silent> <C-k> :call WinMove('k')<CR>
 map <silent> <C-l> :call WinMove('l')<CR>
+
 function! WinMove(key)
   let t:curwin = winnr()
   exec "wincmd ".a:key
@@ -416,8 +82,260 @@ menu Encoding.cp866 :e ++enc=cp866 ++ff=dos<CR>
 menu Encoding.utf-8 :e ++enc=utf8 <CR>
 menu Encoding.koi8-u :e ++enc=koi8-u ++ff=unix<CR>
 map <F8> :emenu Encoding.<TAB>
+" ================ Persistent Undo ==================
+" Keep undo history across sessions, by storing in file.
+" Only works all the time.
 
-nmap <Leader>pr <Plug>(Prettier)
+if has('persistent_undo')
+  silent !mkdir ~/.vim/backups > /dev/null 2>&1
+  set undodir=~/.vim/backups
+  set undofile
+endif
 
-autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
-autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
+" =============== Plugins ===============
+
+call plug#begin('~/.vim/plugged')
+
+" a universal set of defaults that (hopefully) everyone can agree on. Most of
+" them already included in NeoVim
+Plug 'tpope/vim-sensible'
+
+Plug 'junegunn/fzf', {'dir':'~/.fzf', 'do': './install -all'}
+Plug 'junegunn/fzf.vim'
+
+Plug 'sheerun/vim-polyglot' " Syntax highlight
+
+""" tpope
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+
+""" test runner
+Plug 'vim-test/vim-test'
+
+""" nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin' " mark changed files 
+Plug 'ryanoasis/vim-devicons' " show glyphs
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " coloring glyphs
+
+Plug 'wellle/targets.vim' 
+
+""" IDE features
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'honza/vim-snippets'
+
+""" Theme and appearance
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+
+""" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'jiangmiao/auto-pairs'
+
+call plug#end()
+
+" ============== Plugins setups ==================
+
+""" ryanoasis/vim-devicons
+set encoding=UTF-8
+
+""" sheerun/vim-polyglot
+syntax enable
+
+""" morhetz/gruvbox
+autocmd vimenter * colorscheme gruvbox
+" set background=light   " Setting light mode
+
+""" scrooloose/nerdtree
+nmap <C-m> :NERDTreeFind<CR>
+nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+
+""" FZF config
+let $FZF_DEFAULT_COMMAND = 'ag -l
+      \ --nocolor
+      \ --hidden
+      \ --ignore .git
+      \ --ignore .DS_Store
+      \ --ignore coverage
+      \ --ignore node_modules
+      \ --ignore package-lock.json
+      \ --ignore .cache
+      \ --ignore dist
+      \ -g ""'
+
+nnoremap <Leader>o :GFiles .<CR>
+nnoremap <leader>fc :Commits<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fa :Ag<CR>
+nnoremap <leader>b :Buffers<CR>
+
+" " Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" " Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+
+""" janko-m/vim-test setup
+let test#strategy = "neovim"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+""" neoclide/coc.nvim
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-tsserver',
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-eslint', 
+  \ ]
+
+" from readme
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+set updatetime=300
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+""" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
