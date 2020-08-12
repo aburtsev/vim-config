@@ -27,6 +27,15 @@ set smartcase
 
 set scrolloff=3
 
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * checktime
+
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+set nobackup
+set nowb
+set noswapfile
 " ============ Basics Keymaps ==================
 
 " Turn off linewise keys. Normally, the `j' and `k' keys move the cursor down one entire line. with line wrapping on, this can cause the cursor to actually skip a few lines on the screen because it's moving from line N to line N+1 in the file. I want this to act more visually -- I want `down' to mean the next line on the screen
@@ -51,25 +60,6 @@ nnoremap ff :normal! gg=G``<CR>
 " combination
 nmap <silent> // :nohlsearch<CR>
 noremap ,hl :set hlsearch! hlsearch?<CR>
-
-" Open new split for C+hjkl, if split doesnt exist
-map <silent> <C-h> :call WinMove('h')<CR>
-map <silent> <C-j> :call WinMove('j')<CR>
-map <silent> <C-k> :call WinMove('k')<CR>
-map <silent> <C-l> :call WinMove('l')<CR>
-
-function! WinMove(key)
-  let t:curwin = winnr()
-  exec "wincmd ".a:key
-    if (t:curwin == winnr())
-      if (match(a:key,'[jk]'))
-        wincmd v
-      else
-        wincmd s
-      endif
-   exec "wincmd ".a:key
-  endif
-endfunction
 
 " Encodings
 set fileencodings=utf-8,cp1251,koi8-r,cp866
@@ -137,6 +127,9 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'jiangmiao/auto-pairs'
 
+" https://github.com/christoomey/vim-tmux-navigator
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 " ============== Plugins setups ==================
@@ -151,27 +144,40 @@ syntax enable
 autocmd vimenter * colorscheme gruvbox
 " set background=light   " Setting light mode
 
+""" 'vim-airline/vim-airline'
+" fix slow respond after ESC in TMUX
+if ! has('gui_running')
+    set ttimeoutlen=10
+    augroup FastEscape
+        autocmd!
+        au InsertEnter * set timeoutlen=0
+        au InsertLeave * set timeoutlen=1000
+    augroup END
+endif
+
 """ scrooloose/nerdtree
 nmap <C-m> :NERDTreeFind<CR>
 nmap <silent> <leader><leader> :NERDTreeToggle<CR>
 
 """ FZF config
-let $FZF_DEFAULT_COMMAND = 'ag -l
-      \ --nocolor
-      \ --hidden
-      \ --ignore .git
-      \ --ignore .DS_Store
-      \ --ignore coverage
-      \ --ignore node_modules
-      \ --ignore package-lock.json
-      \ --ignore .cache
-      \ --ignore dist
-      \ -g ""'
+set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob '!.git'"
+" let $FZF_DEFAULT_COMMAND = 'ag -l
+"       \ --nocolor
+"       \ --hidden
+"       \ --ignore .git
+"       \ --ignore .DS_Store
+"       \ --ignore coverage
+"       \ --ignore node_modules
+"       \ --ignore package-lock.json
+"       \ --ignore .cache
+"       \ --ignore dist
+"       \ -g ""'
 
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
-nnoremap <leader>fa :Ag<CR>
+nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
 
 " " Mapping selecting mappings
@@ -200,6 +206,7 @@ let g:coc_global_extensions = [
   \ 'coc-prettier', 
   \ 'coc-json', 
   \ 'coc-eslint', 
+  \ 'coc-css', 
   \ ]
 
 " from readme
