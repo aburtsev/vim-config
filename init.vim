@@ -22,6 +22,7 @@ set cursorline
 highlight lCursor guifg=NONE guibg=Cyan
 
 set number
+set relativenumber
 set ignorecase
 set smartcase
 
@@ -157,7 +158,7 @@ endif
 
 """ scrooloose/nerdtree
 nmap <C-m> :NERDTreeFind<CR>
-nmap <silent> <leader><leader> :NERDTreeToggle<CR>
+nmap <silent> <leader>. :NERDTreeToggle<CR>
 
 """ FZF config
 set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
@@ -176,9 +177,9 @@ let $FZF_DEFAULT_COMMAND = "rg --files --hidden --follow --glob '!.git'"
 
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
-nnoremap <leader>ff :Files<CR>
+nnoremap <leader><leader> :Files<CR>
 nnoremap <leader>fa :Rg<CR>
-nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>bb :Buffers<CR>
 
 " " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
